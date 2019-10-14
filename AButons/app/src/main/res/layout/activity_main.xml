@@ -23,27 +23,27 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="goToLinearLayoutActivity"
-            android:text="Layout Lineal" />
+            android:text="Linear Layout Activity" />
 
         <Button
             android:id="@+id/boton2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="goToTableLayoutActivity"
-            android:text="Layout Table " />
+            android:text="Table Layout Activity" />
 
         <Button
             android:id="@+id/boton3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="goToRelativeLayoutActivity"
-            android:text="RelativeLayoutActivity" />
+            android:text="Relative Layout Activity" />
 
         <Button
             android:id="@+id/boton4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:onClick="goToGridLayoutActivity"
-            android:text="GridLayoutActivity" />
+            android:text="Grid Layout Activity" />
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
