@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:alignmentMode="alignBounds"
-    
+    android:columnCount="2"
+    android:rowCount="4"
     tools:context=".GridLayoutActivity">
     <AnalogClock
         android:id="@+id/reloj"
@@ -14,7 +15,7 @@
         android:layout_marginLeft="90dp"
         android:layout_marginTop="25dp"
         android:layout_column="0"
-        android:layout_row="1"
+        android:layout_row="0"
         />
 
     <CheckBox
