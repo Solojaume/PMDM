@@ -15,7 +15,7 @@
 
         <EditText
             android:id="@+id/edNombre"
-            android:layout_width="250dp"
+            android:layout_width="180dp"
             android:layout_height="wrap_content" />
     </TableRow>
     <TableRow android:layout_width="match_parent"
@@ -44,12 +44,16 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"/>
     </TableRow>
-    <TableRow android:layout_width="wrap_content"
-        android:layout_height="wrap_content" >
+
+    <TableRow
+        android:layout_width="wrap_content"
+        android:layout_height="236dp">
+
         <ImageView
             android:id="@+id/miFoto"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"/>
+            android:layout_width="150dp"
+            android:layout_height="100dp"
+            android:src="@drawable/persona" />
     </TableRow>
     <TableRow android:layout_width="match_parent"
         android:layout_height="wrap_content" >
