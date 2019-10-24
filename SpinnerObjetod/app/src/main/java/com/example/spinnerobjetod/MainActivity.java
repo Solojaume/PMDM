@@ -31,9 +31,9 @@ public class MainActivity extends AppCompatActivity {
         lview.setAdapter(miAdaptador);
 
 
-        lview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+        lview.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
-            public void onItemClick(AdapterView arg0, View arg1, int position, long id) {
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String mensaje = "";
                 mensaje = "Item Clicked =>"+ personas [position];
                 showToast(mensaje);
