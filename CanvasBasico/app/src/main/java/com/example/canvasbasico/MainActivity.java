@@ -27,7 +27,7 @@ public class MainActivity extends AppCompatActivity {
         @Override
         protected void onDraw(Canvas canvas) {
             int height=getHeight()/2;
-            int width= getWidth()/2
+            int width= getWidth()/2;
             Paint pincel = new Paint();
             pincel.setColor(Color.RED);
             pincel.setStrokeWidth(15);
