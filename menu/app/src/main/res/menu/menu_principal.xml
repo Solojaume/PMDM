@@ -5,6 +5,14 @@
     <item android:id="@+id/MnuOpc2" android:title="Opcion2"
        ></item>
     <item android:id="@+id/MnuOpc3" android:title="Opcion3"
-        ></item>
+        >
+        <menu>
+            <item android:id="@+id/SubMenu1"
+                android:title="Opcion3.1"></item>
+            <item android:id="@+id/SubMenu2"
+                android:title="Opcion3.2"></item>
+        </menu>
+    </item>
+
 </menu>
 
