@@ -25,13 +25,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Spinner lview =  findViewById(R.id.mispinner);
+        Spinner miSpinner = (Spinner) findViewById(R.id.mispinner);
 
         AdaptadorPersona miAdaptador = new AdaptadorPersona(this);
-        lview.setAdapter(miAdaptador);
+        miSpinner.setAdapter(miAdaptador);
 
+
+
+        miSpinner.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
         lview.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 String mensaje = "";
@@ -39,14 +43,14 @@ public class MainActivity extends AppCompatActivity {
                 showToast(mensaje);
             }
 
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
         });
 
     }
+
     public void showToast(String text) {
         Toast.makeText(this,text, Toast.LENGTH_SHORT).show();
     }
+
     class AdaptadorPersona  extends ArrayAdapter<Persona> {
         private Activity context;
 
