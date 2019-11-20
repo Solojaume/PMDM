@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">SoloBiciDidactico</string>
+    <string name="option2">Configurar</string>
+    <string name="play">jugar</string>
+    <string name="option3">Arcade</string>
+    <string name="option4">Salir</string>
 </resources>
