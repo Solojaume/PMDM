@@ -23,22 +23,23 @@ import android.widget.TextView;
 import java.util.List;
 
 public class Pantalla2 extends AppCompatActivity {
-    protected MedioTransporte listaTransportes[];
-    protected MedioTransporte[] electricos = new MedioTransporte[]{
+    private MedioTransporte listaTransportes[];
+    private MedioTransporte[] electricos = new MedioTransporte[]{
             new MedioTransporte("skate", "Roxi", "12", R.drawable.skate),
             new MedioTransporte("patinete", "Roxi", "15", R.drawable.patinete),
             new MedioTransporte("monociclo", "Oneil", "18", R.drawable.monociclo1)};
 
-    protected MedioTransporte[] bicis = new MedioTransporte[]{
+    private MedioTransporte[] bicis = new MedioTransporte[]{
             new MedioTransporte("Paseo", "Orbea", "15", R.drawable.bici1),
             new MedioTransporte("Ciudad", "Cube", "20", R.drawable.bici2),
             new MedioTransporte("Montaña", "Bike", "25", R.drawable.bici3)};
 
-    protected MedioTransporte[] coches = new MedioTransporte[]{
+    private MedioTransporte[] coches = new MedioTransporte[]{
             new MedioTransporte("Megane", "Renault", "60", R.drawable.megan1),
             new MedioTransporte("Leon", "Seat", "70", R.drawable.leon3),
             new MedioTransporte("Fiesta", "Ford", "75", R.drawable.fiesta2)};
-    protected static String transporte;
+    private static String transporte;
+    private static int precioAlquiler;
 
 
     @Override
@@ -68,14 +69,14 @@ public class Pantalla2 extends AppCompatActivity {
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String mensaje = "";
-                mensaje = "Item Clicked =>"+ listaTransportes [position];
-                System.out.println(mensaje);
+                precioAlquiler=Integer.parseInt(listaTransportes[position].getPrecio());
+//                System.out.println("===========================================================Debug: "+precioAlquiler);
             }
 
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
+        public static ;
 
 
     }
@@ -106,7 +107,6 @@ public class Pantalla2 extends AppCompatActivity {
             TextView precio = item.findViewById(R.id.precios);
             precio.setText(listaTransportes[i].getPrecio());
             ImageView imagen = item.findViewById(R.id.desplegador_imagen);
-            System.out.println("===========================================================Debug: "+imagen);
             imagen.setImageResource(listaTransportes[i].getImagen());
             return item;
         }
