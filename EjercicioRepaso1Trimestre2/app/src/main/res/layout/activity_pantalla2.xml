@@ -45,12 +45,14 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/radiobutton1"
-                android:text="Sin seguro"/>
+                android:text="Sin seguro"
+                android:checked="true"/>
             <RadioButton
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/radiobutton2"
-                android:text="Seguro COMPLETO"/>
+                android:text="Seguro COMPLETO"
+                android:checked="false"/>
         </RadioGroup>
 
     </LinearLayout>

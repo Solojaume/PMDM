@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
+import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.TextView;
 
@@ -49,6 +50,7 @@ public class Pantalla2 extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         transporte = getIntent().getExtras().getString("ClaveTransporte");
         //transporte=(String) getIntent().getSerializableExtra("ClaveTransporte");
+       
 
         switch (transporte){
             case "bici":
@@ -76,9 +78,11 @@ public class Pantalla2 extends AppCompatActivity {
             public void onNothingSelected(AdapterView<?> adapterView) {
             }
         });
-        public static ;
+    }
 
-
+    public static int cacular(int precio){
+        int precioAlquiler=0;
+        return precioAlquiler;
     }
 
     class AdaptadorTransporte  extends ArrayAdapter<MedioTransporte> {
