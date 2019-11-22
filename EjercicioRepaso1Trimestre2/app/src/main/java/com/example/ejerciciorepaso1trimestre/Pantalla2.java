@@ -24,7 +24,6 @@ import java.util.List;
 
 public class Pantalla2 extends AppCompatActivity {
     protected MedioTransporte listaTransportes[];
-    protected static String listaTransporte[];
     protected MedioTransporte[] electricos = new MedioTransporte[]{
             new MedioTransporte("skate", "Roxi", "12", R.drawable.skate),
             new MedioTransporte("patinete", "Roxi", "15", R.drawable.patinete),
@@ -39,10 +38,9 @@ public class Pantalla2 extends AppCompatActivity {
             new MedioTransporte("Megane", "Renault", "60", R.drawable.megan1),
             new MedioTransporte("Leon", "Seat", "70", R.drawable.leon3),
             new MedioTransporte("Fiesta", "Ford", "75", R.drawable.fiesta2)};
-    //    protected static String[] bici=new String[]{"bici1","bici2"};
-//    protected static String[] coche=new String[]{"coche1","tesla"};
-//    protected static String[] electrico=new String[]{"skate","patinete"};
     protected static String transporte;
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -50,19 +48,7 @@ public class Pantalla2 extends AppCompatActivity {
         Bundle bundle = getIntent().getExtras();
         transporte = getIntent().getExtras().getString("ClaveTransporte");
         //transporte=(String) getIntent().getSerializableExtra("ClaveTransporte");
-        /*No he podido hacer el spinner con objetos debido a que este estaba dando problemas en ejecucion
-         * aun así se puede leer el codigo*/
-//        switch (transporte){
-//            case "bici":
-//                listaTransporte=bici;
-//            break;
-//            case "electrico":
-//                listaTransporte=electrico;
-//                break;
-//            case "coche":
-//                listaTransporte=coche;
-//                break;
-//        }
+
         switch (transporte){
             case "bici":
                 listaTransportes=bicis;
@@ -74,9 +60,8 @@ public class Pantalla2 extends AppCompatActivity {
                 listaTransportes=coches;
                 break;
         }
+
         Spinner spinner =findViewById(R.id.spinner);
-//        ArrayAdapter<String>adaptador= new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1,listaTransporte);
-//        spinner.setAdapter(adaptador);
         AdaptadorTransporte adaptador = new AdaptadorTransporte(this, listaTransportes);
 
         spinner.setAdapter(adaptador);
@@ -107,13 +92,12 @@ public class Pantalla2 extends AppCompatActivity {
 
 
         public View getDropDownView(int pos, View convertView, ViewGroup parent) {
-            View vistaDesplegada = getView(pos,convertView,parent);
-            return vistaDesplegada;
+            return getView(pos,convertView,parent);
         }
 
         public View getView(int i, View convertView, ViewGroup parent) {
             LayoutInflater inflater = context.getLayoutInflater();
-            View item = inflater.inflate(R.layout.desplegador,  parent);
+            View item = inflater.inflate(R.layout.desplegador,  parent,false);
 
             TextView tipo = item.findViewById(R.id.tipo);
             tipo.setText(listaTransportes[i].getTipo());
@@ -121,9 +105,16 @@ public class Pantalla2 extends AppCompatActivity {
             marca.setText(listaTransportes[i].getMarca());
             TextView precio = item.findViewById(R.id.precios);
             precio.setText(listaTransportes[i].getPrecio());
-            ImageView imagen = findViewById(R.id.imagen);
+            ImageView imagen = item.findViewById(R.id.desplegador_imagen);
+            System.out.println("===========================================================Debug: "+imagen);
+            imagen.setImageResource(listaTransportes[i].getImagen());
             return item;
         }
+
+//        @Override
+//        public int getCount() {//Puede ser necesario para que no de errores
+//            return listaTransportes.length;
+//        }
     }
 
 }
