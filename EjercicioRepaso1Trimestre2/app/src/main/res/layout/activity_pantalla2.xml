@@ -39,7 +39,7 @@
         <RadioGroup
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/radio">
+            android:id="@+id/radiogroup">
 
             <RadioButton
                 android:layout_width="wrap_content"
@@ -91,6 +91,11 @@
         android:layout_height="wrap_content"
         android:layout_marginLeft="140dp"
         android:text="Total Precio" />
+    <TextView
+        android:id="@+id/labeltot"
+        android:layout_width="150dp"
+        android:layout_height="wrap_content"
+        android:layout_marginRight="0dp"/>
     <Button
         android:id="@+id/btnfactura"
         android:layout_width="match_parent"

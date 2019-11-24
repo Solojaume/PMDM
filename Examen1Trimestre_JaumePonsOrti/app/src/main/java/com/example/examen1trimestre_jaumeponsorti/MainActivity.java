@@ -34,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         bicicleta.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v)
             {
-                seleccion="bicicleta";
+                seleccion="bici";
                 imgResul.setImageResource((R.drawable.bicis));
             }
 
@@ -54,7 +54,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent myIntent = new Intent(MainActivity.this, Pantalla2.class);
                 Bundle myBundle=new Bundle();
 
-                myBundle.putSerializable("ClaveTransporte",seleccion);
+                myBundle.putString("ClaveTransporte",seleccion);
                 myIntent.putExtras(myBundle);
                 startActivity(myIntent);
             }
