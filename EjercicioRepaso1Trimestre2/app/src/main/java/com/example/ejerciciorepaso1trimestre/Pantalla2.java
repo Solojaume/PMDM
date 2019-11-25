@@ -17,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -66,7 +67,7 @@ public class Pantalla2 extends AppCompatActivity {
                 listaTransportes=coches;
                 break;
         }
-
+        //Sppinner
         Spinner spinner =findViewById(R.id.spinner);
         AdaptadorTransporte adaptador = new AdaptadorTransporte(this, listaTransportes);
 
@@ -82,6 +83,7 @@ public class Pantalla2 extends AppCompatActivity {
             }
         });
 
+        //RadioButton
         RadioGroup rg = findViewById(R.id.radiogroup);
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
@@ -91,6 +93,9 @@ public class Pantalla2 extends AppCompatActivity {
                     Pantalla2.precioSeguro=(int)Math.round(precioAlquiler*0.2);
             }
         });
+
+        CheckBox checkBox = findViewById(R.id.checkBox);
+        checkBox.setOnCheckedChangeListener(View.OnCheckedChangeListener() );
 
         Button btnTotal = findViewById(R.id.btntotal);
         btnTotal.setOnClickListener(new View.OnClickListener() {
