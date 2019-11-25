@@ -42,10 +42,20 @@ public class Pantalla2 extends AppCompatActivity {
             new MedioTransporte("Leon", "Seat", "70", R.drawable.leon3),
             new MedioTransporte("Fiesta", "Ford", "75", R.drawable.fiesta2)};
     private static String transporte;
-    private static int precioAlquiler,precioSeguro;
+    private static int precioAlquiler;
+    private static boolean precioSeguro;
+    protected static int listaChecBox[]= {R.id.checkBox,R.id.checkBox2,R.id.checkBox3};
 
+    class Datos{
+        int listaChecBox[];
+        public Datos(){
+            this.listaChecBox= Pantalla2.listaChecBox;
+        }
 
-
+        public int[] getListaChecBox() {
+            return listaChecBox;
+        }
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -54,7 +64,7 @@ public class Pantalla2 extends AppCompatActivity {
         transporte = getIntent().getExtras().getString("ClaveTransporte");
         //transporte=(String) getIntent().getSerializableExtra("ClaveTransporte");
         precioAlquiler=0;
-        precioSeguro=0;
+        precioSeguro=false;
 
         switch (transporte){
             case "bici":
@@ -88,14 +98,13 @@ public class Pantalla2 extends AppCompatActivity {
         rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
-                Pantalla2.precioSeguro=0;
+                Pantalla2.precioSeguro=false;
                 if(group.getCheckedRadioButtonId()==R.id.radiobutton2)
-                    Pantalla2.precioSeguro=(int)Math.round(precioAlquiler*0.2);
+                    Pantalla2.precioSeguro=true;
             }
         });
 
-        CheckBox checkBox = findViewById(R.id.checkBox);
-        checkBox.setOnCheckedChangeListener(View.OnCheckedChangeListener() );
+
 
         Button btnTotal = findViewById(R.id.btntotal);
         btnTotal.setOnClickListener(new View.OnClickListener() {
@@ -110,7 +119,16 @@ public class Pantalla2 extends AppCompatActivity {
     }
 
     public static String calcular(){//int precioAlquiler,int precioSeguro
-        int precioTotal=precioAlquiler+precioSeguro;
+        int precioTotal=precioAlquiler;
+        int c=0;
+        Datos d=new Dastos();
+        for (int i = 0; i < this.listaChecBox.length; i++) {
+            CheckBox checkBox = findViewById(listaChecBox[i]);
+
+            if (checkBox.isChecked())
+        }
+        if(!precioSeguro)
+        precioTotal=precioTotal+(int)Math.round(precioAlquiler*0.2);
         System.out.println("=========================Debug:"+precioAlquiler+" =============="+precioSeguro);
         return ""+precioTotal;
     }
