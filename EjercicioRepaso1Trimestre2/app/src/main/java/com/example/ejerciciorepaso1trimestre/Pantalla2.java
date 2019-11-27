@@ -18,6 +18,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
@@ -36,7 +37,7 @@ public class Pantalla2 extends AppCompatActivity {
             new MedioTransporte("Paseo", "Orbea", "15", R.drawable.bici1),
             new MedioTransporte("Ciudad", "Cube", "20", R.drawable.bici2),
             new MedioTransporte("Montaña", "Bike", "25", R.drawable.bici3)};
-
+    private EditText intro;
     private MedioTransporte[] coches = new MedioTransporte[]{
             new MedioTransporte("Megane", "Renault", "60", R.drawable.megan1),
             new MedioTransporte("Leon", "Seat", "70", R.drawable.leon3),
@@ -61,6 +62,7 @@ public class Pantalla2 extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_pantalla2);
         Bundle bundle = getIntent().getExtras();
+        intro = findViewById(R.id.editText);
         transporte = getIntent().getExtras().getString("ClaveTransporte");
         //transporte=(String) getIntent().getSerializableExtra("ClaveTransporte");
         precioAlquiler=0;
@@ -119,14 +121,14 @@ public class Pantalla2 extends AppCompatActivity {
     }
 
     public  String calcular(){//int precioAlquiler,int precioSeguro
-
+        int precioTotal=precioAlquiler;
         int c=0;
         for (int i = 0; i < this.listaChecBox.length; i++) {
             CheckBox checkBox = findViewById(listaChecBox[i]);
             if (checkBox.isChecked())
                 c++;
         }
-        int precioTotal=precioAlquiler+(50*c);
+        precioTotal=(precioTotal+(50*c))*Integer.valueOf(intro ) ;
         if(precioSeguro==true)
         precioTotal=precioTotal+(int)Math.round(precioTotal*0.2);
         System.out.println("=========================Debug:"+precioAlquiler+" =============="+precioSeguro);
