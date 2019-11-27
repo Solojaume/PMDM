@@ -37,6 +37,7 @@
         android:text="Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/entrada"
-        tools:layout_editor_absoluteX="274dp" />
+        app:layout_constraintVertical_bias="0.0"
+        tools:layout_editor_absoluteX="265dp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
