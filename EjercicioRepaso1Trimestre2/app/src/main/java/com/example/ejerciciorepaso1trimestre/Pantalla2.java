@@ -118,17 +118,17 @@ public class Pantalla2 extends AppCompatActivity {
 
     }
 
-    public static String calcular(){//int precioAlquiler,int precioSeguro
-        int precioTotal=precioAlquiler;
+    public  String calcular(){//int precioAlquiler,int precioSeguro
+
         int c=0;
-        Datos d=new Dastos();
         for (int i = 0; i < this.listaChecBox.length; i++) {
             CheckBox checkBox = findViewById(listaChecBox[i]);
-
             if (checkBox.isChecked())
+                c++;
         }
-        if(!precioSeguro)
-        precioTotal=precioTotal+(int)Math.round(precioAlquiler*0.2);
+        int precioTotal=precioAlquiler+(50*c);
+        if(precioSeguro==true)
+        precioTotal=precioTotal+(int)Math.round(precioTotal*0.2);
         System.out.println("=========================Debug:"+precioAlquiler+" =============="+precioSeguro);
         return ""+precioTotal;
     }
