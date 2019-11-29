@@ -7,6 +7,14 @@ public class Factura {
 
     public Factura(){};
 
+    public Factura(int imagen, String precioh, String modelo, String seguro, int tiempo) {
+        this.imagen = imagen;
+        this.precioh = precioh;
+        this.modelo = modelo;
+        this.seguro = seguro;
+        this.tiempo = tiempo;
+    }
+
     public int getImagen() {
         return imagen;
     }

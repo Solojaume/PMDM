@@ -46,17 +46,9 @@ public class Pantalla2 extends AppCompatActivity {
     private static int precioAlquiler;
     private static boolean precioSeguro;
     protected static int listaChecBox[]= {R.id.checkBox,R.id.checkBox2,R.id.checkBox3};
+    private static Factura factura;
+    private static int pos;
 
-    class Datos{
-        int listaChecBox[];
-        public Datos(){
-            this.listaChecBox= Pantalla2.listaChecBox;
-        }
-
-        public int[] getListaChecBox() {
-            return listaChecBox;
-        }
-    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,6 +59,7 @@ public class Pantalla2 extends AppCompatActivity {
         //transporte=(String) getIntent().getSerializableExtra("ClaveTransporte");
         precioAlquiler=0;
         precioSeguro=false;
+        factura= new Factura();
 
         switch (transporte){
             case "bici":
@@ -79,15 +72,19 @@ public class Pantalla2 extends AppCompatActivity {
                 listaTransportes=coches;
                 break;
         }
+
         //Sppinner
         Spinner spinner =findViewById(R.id.spinner);
         AdaptadorTransporte adaptador = new AdaptadorTransporte(this, listaTransportes);
 
         spinner.setAdapter(adaptador);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+
+
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 precioAlquiler=Integer.parseInt(listaTransportes[position].getPrecio());
+                pos= position;
 //               System.out.println("===========================================================Debug: "+precioAlquiler);
             }
 
@@ -119,20 +116,31 @@ public class Pantalla2 extends AppCompatActivity {
         });
 
     }
-
+    int c=0;
     public  String calcular(){//int precioAlquiler,int precioSeguro
         int precioTotal=precioAlquiler;
-        int c=0;
+
         for (int i = 0; i < this.listaChecBox.length; i++) {
             CheckBox checkBox = findViewById(listaChecBox[i]);
             if (checkBox.isChecked())
                 c++;
         }
-        precioTotal=(precioTotal+(50*c))*Integer.valueOf(intro ) ;
+
+        precioTotal=(precioTotal+(50*c))*Integer.valueOf(String.valueOf(intro.getText())) ;
         if(precioSeguro==true)
-        precioTotal=precioTotal+(int)Math.round(precioTotal*0.2);
-        System.out.println("=========================Debug:"+precioAlquiler+" =============="+precioSeguro);
+            precioTotal=precioTotal+(int)Math.round(precioTotal*0.2);
+        System.out.println("=========================Debug:"+precioTotal+" ==============");
         return ""+precioTotal;
+    }
+
+    public void crearFactura(){
+        factura.setImagen(listaTransportes[pos].getImagen());
+        factura.setModelo(listaTransportes[pos].getTipo());
+        factura.setPrecioh(listaTransportes[pos].getPrecio());
+        factura.setTiempo(Integer.valueOf(String.valueOf(intro.getText())));
+        factura.setSeguro("Sin seguro");
+        if(precioSeguro==true)
+            factura.setSeguro("Con seguro");
     }
 
     class AdaptadorTransporte  extends ArrayAdapter<MedioTransporte> {
