@@ -1,11 +1,33 @@
 package com.example.ejerciciorepaso1trimestre;
 
-public class Factura {
+import java.io.Serializable;
+
+public class Factura implements Serializable {
     private int imagen;
-    private String  precioh,modelo,seguro;
-    private int tiempo;
+    private String  precioh,modelo,seguro,total;
+    private int tiempo,extras;
+
+    public Factura(String total) {
+        this.total = total;
+    }
+
+    public String getTotal() {
+        return total;
+    }
+
+    public void setTotal(String total) {
+        this.total = total;
+    }
 
     public Factura(){};
+
+    public int getExtras() {
+        return extras;
+    }
+
+    public void setExtras(int extras) {
+        this.extras = extras;
+    }
 
     public Factura(int imagen, String precioh, String modelo, String seguro, int tiempo) {
         this.imagen = imagen;

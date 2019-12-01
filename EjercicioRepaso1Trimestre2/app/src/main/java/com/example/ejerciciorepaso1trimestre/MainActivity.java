@@ -4,9 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
     private static String seleccion;
@@ -46,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
             }
 
         });
+
         btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -58,5 +63,32 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+    public boolean onCreateOptionsMenu(Menu menu){
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_principal,menu);
+        return true;
+    }
 
+    public boolean onOptionsItemSelected(MenuItem item) {
+        String mensaje = "";
+        switch (item.getItemId()) {
+            case R.id.MnuOpc1:
+                Toast.makeText(getApplicationContext(), "Opcion 1 pulsada!", Toast.LENGTH_SHORT).show();
+                Intent myIntent = new Intent(MainActivity.this, Milogo.class);
+                startActivity(myIntent);
+                return true;
+
+            case R.id.MnuOpc2:
+                Toast.makeText(getApplicationContext(), "Jaume Pons", Toast.LENGTH_SHORT).show();
+                return true;
+
+            case R.id.MnuOpc3:
+                Toast.makeText(getApplicationContext(), "Jaume Pons!", Toast.LENGTH_SHORT).show();
+                //Si ponemos Toast.LENGTH_Long no aparecera nunca el mensaje del menu
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
 }

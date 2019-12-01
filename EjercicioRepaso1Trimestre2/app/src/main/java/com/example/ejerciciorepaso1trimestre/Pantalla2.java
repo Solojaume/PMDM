@@ -2,6 +2,7 @@ package com.example.ejerciciorepaso1trimestre;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 
@@ -11,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
+import android.os.Debug;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -46,7 +48,7 @@ public class Pantalla2 extends AppCompatActivity {
     private static int precioAlquiler;
     private static boolean precioSeguro;
     protected static int listaChecBox[]= {R.id.checkBox,R.id.checkBox2,R.id.checkBox3};
-    private static Factura factura;
+
     private static int pos;
 
     @Override
@@ -59,7 +61,7 @@ public class Pantalla2 extends AppCompatActivity {
         //transporte=(String) getIntent().getSerializableExtra("ClaveTransporte");
         precioAlquiler=0;
         precioSeguro=false;
-        factura= new Factura();
+
 
         switch (transporte){
             case "bici":
@@ -110,8 +112,13 @@ public class Pantalla2 extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 TextView t=findViewById(R.id.labeltot);
-                System.out.println("=========================Debug:"+precioAlquiler+" =============="+precioSeguro+" ================="+t);
                 t.setText(calcular());
+            }
+        });
+        Button btnFactura = findViewById(R.id.btnfactura);
+        btnFactura.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v) {
+                lanzarFactura();
             }
         });
 
@@ -119,28 +126,39 @@ public class Pantalla2 extends AppCompatActivity {
     int c=0;
     public  String calcular(){//int precioAlquiler,int precioSeguro
         int precioTotal=precioAlquiler;
-
+        c=0;
         for (int i = 0; i < this.listaChecBox.length; i++) {
             CheckBox checkBox = findViewById(listaChecBox[i]);
             if (checkBox.isChecked())
                 c++;
         }
 
-        precioTotal=(precioTotal+(50*c))*Integer.valueOf(String.valueOf(intro.getText())) ;
+        precioTotal=(precioAlquiler*Integer.valueOf(String.valueOf(intro.getText())))+(50*c);
         if(precioSeguro==true)
             precioTotal=precioTotal+(int)Math.round(precioTotal*0.2);
         System.out.println("=========================Debug:"+precioTotal+" ==============");
         return ""+precioTotal;
     }
-
-    public void crearFactura(){
+    public void lanzarFactura(){
+        Intent myIntent = new Intent(this, Pantalla3.class);
+        Bundle myBundle=new Bundle();
+        myBundle.putSerializable("factura",crearFactura());
+        myIntent.putExtras(myBundle);
+        startActivity(myIntent);
+    }
+    public Factura crearFactura(){
+//    public Factura crearFactura(MedioTransporte listaTransportes[],int pos,String tiempo){
+        Factura factura= new Factura();
         factura.setImagen(listaTransportes[pos].getImagen());
         factura.setModelo(listaTransportes[pos].getTipo());
         factura.setPrecioh(listaTransportes[pos].getPrecio());
+        factura.setExtras(50*c);
         factura.setTiempo(Integer.valueOf(String.valueOf(intro.getText())));
         factura.setSeguro("Sin seguro");
+        factura.setTotal(calcular());
         if(precioSeguro==true)
             factura.setSeguro("Con seguro");
+        return factura;
     }
 
     class AdaptadorTransporte  extends ArrayAdapter<MedioTransporte> {
