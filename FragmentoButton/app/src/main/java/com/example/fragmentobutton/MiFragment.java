@@ -10,6 +10,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 
 /**
@@ -28,7 +29,7 @@ public class MiFragment extends Fragment {
 
     // TODO: Rename and change types of parameters
     private int mParam1;
-
+    private int mParam2;
 
     public MiFragment() {
         // Required empty public constructor
@@ -43,11 +44,11 @@ public class MiFragment extends Fragment {
      * @return A new instance of fragment MiFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static MiFragment newInstance(int param1) {
+    public static MiFragment newInstance(int param1,int param2) {
         MiFragment fragment = new MiFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_PARAM1, param1);
-
+        args.putInt(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -57,6 +58,7 @@ public class MiFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getInt(ARG_PARAM1);
+            mParam2 = getArguments().getInt(ARG_PARAM2);
         }
     }
 
@@ -66,6 +68,8 @@ public class MiFragment extends Fragment {
         // Inflate the layout for this fragment
         View v=inflater.inflate(R.layout.fragment_mi, container, false);
         ImageView mifoto=(ImageView) v.findViewById(R.id.imagen);
+        TextView t= v.findViewById(R.id.textviewfragment);
+        t.setText("Fragment :"+ mParam2);
         mifoto.setImageResource(mParam1);
         return v;
 

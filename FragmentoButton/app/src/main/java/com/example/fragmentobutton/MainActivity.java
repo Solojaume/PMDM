@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
             }
         });
         if(savedInstanceState==null){
-            Fragment miFragement=MiFragment.newInstance(dibujos[0]);
+            Fragment miFragement=MiFragment.newInstance(dibujos[0],mStrackPosition);
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.add(R.id.miFrg,miFragement);
             ft.commit();
@@ -43,12 +43,14 @@ public class MainActivity extends AppCompatActivity {
 
     public void addFragment(){
         Fragment miFragment;
+        mStrackPosition++;
         Random r= new Random();
-        miFragment= MiFragment.newInstance(dibujos[r.nextInt(dibujos.length)]);
+        miFragment= MiFragment.newInstance(dibujos[r.nextInt(dibujos.length)],mStrackPosition);
         FragmentTransaction fg= getFragmentManager().beginTransaction();
         fg.replace(R.id.miFrg,miFragment);
         fg.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         fg.addToBackStack(null);
+
         fg.commit();
     }
     public void onSaveInstanceState(@NonNull Bundle outState, @NonNull PersistableBundle outPersistence){
