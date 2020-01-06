@@ -4,11 +4,13 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 
-import androidx.fragment.app.Fragment;
+import android.app.Fragment;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 
 /**
@@ -24,7 +26,7 @@ public class SimpleFragment extends Fragment {
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
     private static final String ARG_PARAM2 = "param2";
-
+    int[] imagenes = {R.drawable.indice,R.drawable.sf90,R.drawable.f40, R.drawable.captura};
     // TODO: Rename and change types of parameters
     private int mParam1;
     private int mParam2;
@@ -42,11 +44,10 @@ public class SimpleFragment extends Fragment {
      * @return A new instance of fragment SimpleFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SimpleFragment newInstance(int param1, int param2) {
+    public static SimpleFragment newInstance(int param1) {
         SimpleFragment fragment = new SimpleFragment();
         Bundle args = new Bundle();
         args.putInt(ARG_PARAM1, param1);
-        args.putInt(ARG_PARAM2, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -56,16 +57,28 @@ public class SimpleFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             mParam1 = getArguments().getInt(ARG_PARAM1);
-            mParam2 = getArguments().getInt(ARG_PARAM2);
         }
     }
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_simple, container, false);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View v  = null;
+        TextView tv ;
+        // dependiendo de si es par o impar mostramos distintos layouts
+        if (mParam1 % 2 != 0){
+            v = inflater.inflate(R.layout.fragment_simple, container, false);
+            tv = v.findViewById(R.id.text);
+        }
+        else{
+            v = inflater.inflate(R.layout.fragment_simple2 , container, false);
+            tv = v.findViewById(R.id.text2);
+            ImageView im=v.findViewById(R.id.image);
+            im.setImageResource(imagenes[(int)Math.round(Math.random()*3)]);
+        }
+        tv.setText("Fragmento número #" + mParam1);
+        return v;
     }
+
 
 
 
