@@ -8,7 +8,6 @@
         android:id="@+id/textViewNombre"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-
         android:text="TextView" />
 
     <TextView
@@ -17,6 +16,7 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:text="TextView" />
+
     <TextView
         android:id="@+id/textViewEdat"
         android:layout_width="wrap_content"
