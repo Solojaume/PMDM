@@ -21,8 +21,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         listaPersonas = new ArrayList<Persona>();
+        createPersona();
         Spinner spinner =findViewById(R.id.spinner);
-        AdaptadorPersona adaptador = new AdaptadorPersona(this, listaPersonas);
+        AdaptadorPersona adaptador = new AdaptadorPersona(this,R.layout.desplegador_persona,  listaPersonas);
 
         spinner.setAdapter(adaptador);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {

@@ -4,25 +4,29 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textViewNombre"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent"
-        android:text="TextView" />
 
     <TextView
-        android:id="@+id/textViewApellidos"
+        android:id="@+id/tvnombre"
+        android:textStyle="bold"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:text="TextView" />
+        android:layout_marginTop="5dp" />
 
     <TextView
-        android:id="@+id/textViewEdat"
+        android:id="@+id/tvapellido"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
-        android:layout_weight="1"
-        android:text="TextView" />
+        android:layout_marginTop="10dp" />
 
+    <TextView.
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginTop="15dp" />
 
+    <ImageView
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        android:id="@+id/desplegador_imagen"
+        android:src="@drawable/enzo"
+        android:orientation="vertical"/>
 </LinearLayout>
