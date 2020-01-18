@@ -41,7 +41,7 @@ public class AdaptadorPersona  extends ArrayAdapter<Persona> {
             h.tvName = v.findViewById(R.id.tvnombre);
             h.tvApellidos = v.findViewById(R.id.tvapellido);
             h.tvEdad = v.findViewById(R.id.tvedad);
-            h.ivImagen= v.findViewById(R.id.desplegador_imagen);
+//            h.ivImagen= v.findViewById(R.id.desplegador_imagen);
             v.setTag(h);
         } else
             h=(Holder)v.getTag();
