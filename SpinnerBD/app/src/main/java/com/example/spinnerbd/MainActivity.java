@@ -32,7 +32,6 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
 
-             System.out.println("===========================================================Debug: "+position);
             }
 
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -44,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private void createPersona(){
         Persona p1= new Persona("Enzo","Ferrari",80,R.drawable.enzo);
         listaPersonas.add(p1);
-        Persona p2= new Persona("Ferruccio","Lamborghini",80,R.drawable.ferruccio);
+        Persona p2= new Persona("Ferruccio","Lamborghini",70,R.drawable.ferruccio);
         listaPersonas.add(p2);
 
     }

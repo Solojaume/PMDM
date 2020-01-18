@@ -38,24 +38,24 @@ public class AdaptadorPersona  extends ArrayAdapter<Persona> {
         if(v == null) {
           v = LayoutInflater.from(parent.getContext()).inflate(R.layout.desplegador_persona, parent, false);
             h = new Holder();
-            System.out.println("===========================================================Debug: "+1);
             h.tvName = v.findViewById(R.id.tvnombre);
-            System.out.println("===========================================================Debug: "+1);
             h.tvApellidos = v.findViewById(R.id.tvapellido);
-            System.out.println("===========================================================Debug: "+2);
-
             h.tvEdad = v.findViewById(R.id.tvedad);
-            v.setTag(h);
             h.ivImagen= v.findViewById(R.id.desplegador_imagen);
+            v.setTag(h);
         } else
             h=(Holder)v.getTag();
         Persona p = personas.get(position);
         h.tvName.setText(p.getNombre());
-        System.out.println("===========================================================Debug: "+position);
         h.tvApellidos.setText(p.getApellido());
         h.tvEdad.setText("" + p.getEdad());
         h.ivImagen.setImageResource(R.drawable.enzo);
 
         return v;
+    }
+
+    @Override
+    public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
+        return getView(position, convertView, parent);
     }
 }
