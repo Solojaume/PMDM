@@ -18,7 +18,8 @@
         android:layout_height="match_parent"
         android:layout_marginTop="10dp" />
 
-    <TextView.
+    <TextView
+        android:id="@+id/tvedad"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:layout_marginTop="15dp" />
@@ -28,5 +29,5 @@
         android:layout_height="80dp"
         android:id="@+id/desplegador_imagen"
         android:src="@drawable/enzo"
-        android:orientation="vertical"/>
+        />
 </LinearLayout>
