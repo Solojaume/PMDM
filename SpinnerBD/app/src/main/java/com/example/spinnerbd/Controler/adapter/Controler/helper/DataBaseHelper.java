@@ -11,12 +11,14 @@ public class DataBaseHelper {
     private DataBaseHelperInternal mDbHelper = null;
     private SQLiteDatabase mDb = null;
     private static final String DATABASE_NAME = "DBClientes";
-    private static final int DATABASE_VERSION = 3;
+    private static final int DATABASE_VERSION = 5;
     private static final String DATABASE_TABLE_CLIENTES = "Clientes";
-    public static final String EDAD = "codigo";
+    public static final String CODIGO = "codigo";
     public static final String NOMBRE = "nombre";
     public static final String APELLIDO = "apellido";
-    private static final String DATABASE_CREATE_CLIENTES = "create table " + DATABASE_TABLE_CLIENTES + " (" + EDAD + " integer primary key ," + NOMBRE + " text not null," + "TELEFONO" + " text not null" + ")";
+    public static final String EDAD = "edad";
+    private static final String DATABASE_CREATE_CLIENTES = "create table " + DATABASE_TABLE_CLIENTES +
+            " (" + CODIGO + " integer primary key , " + NOMBRE + " text not null," + APELLIDO + " text not null, " + EDAD+ "integer not null"+")";
 
     public DataBaseHelper(Context ctx) {
         mCtx = ctx;
@@ -49,15 +51,16 @@ public class DataBaseHelper {
     }
     public void close(){  mDbHelper.close();  }
     //crear elemento
-    public long insertItem(int ed, String nom, String ap){
+    public long insertItem(int cod, String nom, String ap, int ed){
         ContentValues initialValues = new ContentValues();
-        initialValues.put(EDAD, ed);
+        initialValues.put(CODIGO, cod);
         initialValues.put(NOMBRE, nom);
         initialValues.put(APELLIDO, ap);
+        initialValues.put(EDAD, ed);
         return mDb.insert(DATABASE_TABLE_CLIENTES, null, initialValues);
     }
     public Cursor getClients(){
-        String[] campos = new String[] {"edad","nombre", "apellidos"};
+        String[] campos = new String[] {"nombre", "apellidos","edad"};
         Cursor c = mDb.query("Clientes", campos, null,null,null,null, null, null);
         return c;
     }
