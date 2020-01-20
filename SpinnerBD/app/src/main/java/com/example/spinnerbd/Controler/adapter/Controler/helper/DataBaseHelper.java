@@ -11,7 +11,7 @@ public class DataBaseHelper {
     private DataBaseHelperInternal mDbHelper = null;
     private SQLiteDatabase mDb = null;
     private static final String DATABASE_NAME = "DBClientes";
-    private static final int DATABASE_VERSION = 5;
+    private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_TABLE_CLIENTES = "Clientes";
     public static final String CODIGO = "codigo";
     public static final String NOMBRE = "nombre";

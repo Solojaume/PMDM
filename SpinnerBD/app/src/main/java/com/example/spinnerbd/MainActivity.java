@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         //En caso de abrir de forma correcta la base de datos
         if (this.cliDBh!= null) {
             System.out.println("=========================Debug");
-            // Introducimos 3 clientes de ejemplo
+            // Introducimos 3 clientes de ejemplo data
             for (int cont = 1; cont <= 3; cont++) {
                 //Creamos los datos
 
