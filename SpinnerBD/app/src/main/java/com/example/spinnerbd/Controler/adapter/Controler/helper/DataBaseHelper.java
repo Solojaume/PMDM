@@ -6,7 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-public class DataBaseHelper {
+public class                                        DataBaseHelper {
     private Context mCtx = null;
     private DataBaseHelperInternal mDbHelper = null;
     private SQLiteDatabase mDb = null;
