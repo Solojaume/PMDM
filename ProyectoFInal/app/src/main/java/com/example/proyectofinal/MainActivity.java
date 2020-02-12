@@ -2,11 +2,13 @@ package com.example.proyectofinal;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.SQLException;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.proyectofinal.controller.DataBaseHelper;
 import com.example.proyectofinal.controller.GeneralConf;
@@ -17,23 +19,29 @@ public class MainActivity extends AppCompatActivity {
     private int mLastRowSelected = 0;
     public static DataBaseHelper mDbHelper = null;
     public static int idUser;
+    Integer mRowId=null;
+    TextView tError ;
     public static EditText eUser,ePass;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        sesionIniciada();
         eUser=findViewById(R.id.editTextU);
         ePass=findViewById(R.id.editTextP);
         mDbHelper = new DataBaseHelper(this);
-        try {
-            fillData();
-        } catch (SQLException e) {
-            e.printStackTrace();
-//            showMessage(R.string.dataError);
-        }
-//        registerForContextMenu(getListView());
+        tError= findViewById(R.id.textViewError);
+        mRowId = (savedInstanceState == null) ? null :
+                (Integer) savedInstanceState.getSerializable(GeneralConf.U_ID);
+
+//        sesionIniciada();
+//        try {
+//            fillData();
+//        } catch (SQLException e) {
+//            e.printStackTrace();
+////            showMessage(R.string.dataError);
+//        }
+////        registerForContextMenu(getListView());
     }
 
     @Override
@@ -41,25 +49,54 @@ public class MainActivity extends AppCompatActivity {
         super.onRestart();
     }
 
-    public  void crearIniciarUsuario(View view){
+    public  void crearIniciarUsuario(View view){//onclick button
         mDbHelper.open();
-        if (mDbHelper.getUser(eUser.getText().toString())==null){
-
+        System.out.println(mDbHelper.getUser(eUser.getText().toString()));
+        Cursor userCursor = null;
+        if (mRowId==null){
+            mDbHelper.insertUser(eUser.getText().toString(),ePass.getText().toString());
+            Intent intent = new Intent (this,GeneroActivity.class);
+            startActivity(intent);
         }
+        else{
+            userCursor = mDbHelper.getUser(eUser.getText().toString());
+            String userN = userCursor.getString(userCursor.getColumnIndex(GeneralConf.USERNAME));
+            String pass = userCursor.getString(userCursor.getColumnIndex(GeneralConf.U_PASSWORD));
+
+            if(userN=="null"){//User no esiste
+                mDbHelper.insertUser(eUser.getText().toString(),ePass.getText().toString());
+                idUser = userCursor.getInt(userCursor.getColumnIndex(GeneralConf.U_ID));
+                Intent intent = new Intent (this,GeneroActivity.class);
+                startActivity(intent);
+
+            }else {
+                if(pass.equals(ePass.getText().toString())){
+                    idUser = userCursor.getInt(userCursor.getColumnIndex(GeneralConf.U_ID));
+                    Intent intent = new Intent (this,PrincipalActivity.class);
+                    startActivity(intent);
+                }
+                else{
+                    tError.setText("No se ha introducido la contraseña correcta");
+                }
+            }
+
+
+
+         }
     }
 
     public int sesionIniciada(){
         mDbHelper.open();
-        Cursor itemCursor = mDbHelper.getUsuarios();
+        Cursor userCursor = mDbHelper.getUsuarios();
         ListEntry item = null;
         ArrayList<ListEntry> resultList = new ArrayList<ListEntry>();
         int cont=0;
         // se procesa el resultado
-        while (itemCursor.moveToNext()) {
-            int id = itemCursor.getInt(itemCursor.getColumnIndex(GeneralConf.U_ID));
-            String pass = itemCursor.getString(itemCursor.getColumnIndex(GeneralConf.U_PASSWORD));
-            String username = itemCursor.getString(itemCursor.getColumnIndex(GeneralConf.USERNAME));
-            int iniciada = itemCursor.getInt(itemCursor.getColumnIndex(GeneralConf.U_INICIADO));
+        while (userCursor.moveToNext()) {
+            int id = userCursor.getInt(userCursor.getColumnIndex(GeneralConf.U_ID));
+            String pass = userCursor.getString(userCursor.getColumnIndex(GeneralConf.U_PASSWORD));
+            String username = userCursor.getString(userCursor.getColumnIndex(GeneralConf.USERNAME));
+            int iniciada = userCursor.getInt(userCursor.getColumnIndex(GeneralConf.U_INICIADO));
             if (iniciada==1){
 
                 cont++;
@@ -69,7 +106,7 @@ public class MainActivity extends AppCompatActivity {
 
         }
         //cerramos la base de datos
-        itemCursor.close();
+        userCursor.close();
         mDbHelper.close();
         if (cont==0){
             return 0;

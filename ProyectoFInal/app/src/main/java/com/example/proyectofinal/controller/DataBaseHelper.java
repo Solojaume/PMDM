@@ -55,9 +55,8 @@ public class DataBaseHelper {
 
 
     //crear User
-    public long insertUser(int id, String username, String password, int iniciado){
+    public long insertUser(String username, String password, int iniciado){
         ContentValues initialValues = new ContentValues();
-        initialValues.put(GeneralConf.U_ID, id);
         initialValues.put(GeneralConf.USERNAME, username);
         initialValues.put(GeneralConf.U_PASSWORD, password);
         initialValues.put(GeneralConf.U_INICIADO, iniciado);
@@ -66,7 +65,6 @@ public class DataBaseHelper {
 
     public long insertUser( String username, String password){
         ContentValues initialValues = new ContentValues();
-        initialValues.put(GeneralConf.U_ID, id);
         initialValues.put(GeneralConf.USERNAME, username);
         initialValues.put(GeneralConf.U_PASSWORD, password);
 //        initialValues.put(GeneralConf.U_INICIADO,1);

@@ -11,7 +11,7 @@ public final class GeneralConf {
     public static final String U_PASSWORD = "password";
     public static final String U_INICIADO = "iniciado";
     public static final String DATABASE_CREATE_USER=
-            "create table "+DATABASE_TABLE_USER+" ("+U_ID+ "integer  primary key autoincrement,"+USERNAME+" text not null, "
+            "create table "+DATABASE_TABLE_USER+" ("+U_ID+ " integer primary key autoincrement,"+USERNAME+" text not null, "
             +U_PASSWORD+" text not null, "+U_INICIADO+ " integer )";
     //Tabla Genero
     public static final String DATABASE_TABLE_GENEROS="genero";
