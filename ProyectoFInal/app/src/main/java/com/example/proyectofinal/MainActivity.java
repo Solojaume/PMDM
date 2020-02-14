@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private int mLastRowSelected = 0;
     public static DataBaseHelper mDbHelper = null;
-    public static int idUser;
+    public static int idUser=0;
     Integer mRowId=null;
     TextView tError ;
     public static EditText eUser,ePass;
@@ -52,16 +52,23 @@ public class MainActivity extends AppCompatActivity {
     public  void crearIniciarUsuario(View view){//onclick button
         mDbHelper.open();
         System.out.println(mDbHelper.getUser(eUser.getText().toString()));
-        Cursor userCursor = null;
-        if (mRowId==null){
+        /*try {
+            Cursor userCursor = mDbHelper.getUsuarios();
+
+        System.out.println("================================"+userCursor.getCount());
+        if (userCursor.getCount() == 0){
             mDbHelper.insertUser(eUser.getText().toString(),ePass.getText().toString());
             Intent intent = new Intent (this,GeneroActivity.class);
             startActivity(intent);
         }
         else{
             userCursor = mDbHelper.getUser(eUser.getText().toString());
-            String userN = userCursor.getString(userCursor.getColumnIndex(GeneralConf.USERNAME));
-            String pass = userCursor.getString(userCursor.getColumnIndex(GeneralConf.U_PASSWORD));
+            String userN=null;
+            String pass=null;
+            if (userCursor.getCount()>0){
+                userN = userCursor.getString(userCursor.getColumnIndex(GeneralConf.USERNAME));
+                pass = userCursor.getString(userCursor.getColumnIndex(GeneralConf.U_PASSWORD));
+            }
 
             if(userN=="null"){//User no esiste
                 mDbHelper.insertUser(eUser.getText().toString(),ePass.getText().toString());
@@ -69,7 +76,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent (this,GeneroActivity.class);
                 startActivity(intent);
 
-            }else {
+            }else {//User existe
                 if(pass.equals(ePass.getText().toString())){
                     idUser = userCursor.getInt(userCursor.getColumnIndex(GeneralConf.U_ID));
                     Intent intent = new Intent (this,PrincipalActivity.class);
@@ -81,8 +88,13 @@ public class MainActivity extends AppCompatActivity {
             }
 
 
+        }
+        }catch (SQLException e){
 
-         }
+        }
+        mDbHelper.close();*/
+        Intent intent = new Intent (this,PrincipalActivity.class);
+        startActivity(intent);
     }
 
     public int sesionIniciada(){

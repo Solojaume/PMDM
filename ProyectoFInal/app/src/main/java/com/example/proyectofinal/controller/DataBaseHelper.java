@@ -50,7 +50,7 @@ public class DataBaseHelper {
 
     //obtener todos los elementos
     public Cursor getUsuarios() {
-        return mDb.query(GeneralConf.DATABASE_CREATE_USER, new String[] {GeneralConf.U_ID, GeneralConf.USERNAME, GeneralConf.U_PASSWORD,GeneralConf.U_INICIADO}, null, null, null, null,GeneralConf.USERNAME);
+        return mDb.query(GeneralConf.DATABASE_TABLE_USER, new String[] {GeneralConf.U_ID, GeneralConf.USERNAME, GeneralConf.U_PASSWORD,GeneralConf.U_INICIADO}, null, null, null, null,GeneralConf.USERNAME);
     }
 
 
@@ -81,7 +81,7 @@ public class DataBaseHelper {
         return mDb.rawQuery(" select "+ GeneralConf.U_ID+","+ GeneralConf.USERNAME+","+ GeneralConf.U_PASSWORD+","+GeneralConf.U_INICIADO + " from " + GeneralConf.DATABASE_TABLE_USER  + " where " + GeneralConf.U_ID + "= ?",new String[]{Integer.toString(itemId)});
     }
     public Cursor getUser(String userName){
-        return mDb.rawQuery(" select "+ GeneralConf.U_ID+","+ GeneralConf.USERNAME+","+ GeneralConf.U_PASSWORD+","+GeneralConf.U_INICIADO + " from " + GeneralConf.DATABASE_TABLE_USER  + " where " + GeneralConf.U_ID + "= ?",new String[]{userName});
+        return mDb.rawQuery(" select "+ GeneralConf.U_ID+","+ GeneralConf.USERNAME+","+ GeneralConf.U_PASSWORD+","+GeneralConf.U_INICIADO + " from " + GeneralConf.DATABASE_TABLE_USER  + " where " + GeneralConf.USERNAME + "= ?",new String[]{userName});
     }
 
     //actualiza usuario
@@ -92,5 +92,8 @@ public class DataBaseHelper {
         cv.put(GeneralConf.U_INICIADO, iniciado);
         return mDb.update(GeneralConf.DATABASE_TABLE_USER, cv, GeneralConf.U_ID+ "=?", new String[]{Integer.toString(id)});
     }
+
+    //count users
+
 
 }

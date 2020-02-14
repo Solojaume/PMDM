@@ -68,7 +68,6 @@ import android.database.sqlite.SQLiteOpenHelper;
         }
 
 
-        //crear elemento
         public long insertItem(String item, String place, String description, int importance){
             ContentValues initialValues = new ContentValues();
             initialValues.put(SL_IMPORTANCE, importance);
