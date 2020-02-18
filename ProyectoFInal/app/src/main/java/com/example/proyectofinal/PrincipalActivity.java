@@ -27,6 +27,9 @@ public class PrincipalActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent= getIntent();
+        Bundle bundle=intent.getExtras();
+        preferencias=bundle.getSerializable("lG");
         setContentView(R.layout.activity_principal);
         filtrarPreferenciasGenero();
         ListView lstGeneros = (ListView)findViewById(R.id.listViewGeneros);
