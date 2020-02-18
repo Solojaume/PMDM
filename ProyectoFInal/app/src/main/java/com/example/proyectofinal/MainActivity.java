@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private int mLastRowSelected = 0;
     public static DataBaseHelper mDbHelper = null;
-    public static int idUser=0;
+    public static int idUser=1;
     Integer mRowId=null;
     TextView tError ;
     public static EditText eUser,ePass;
@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
         super.onRestart();
     }
 
-    public  void crearIniciarUsuario(View view){//onclick button
+    public void iniciarUsuario(View view){//onclick button
         mDbHelper.open();
         System.out.println(mDbHelper.getUser(eUser.getText().toString()));
         /*try {
@@ -94,6 +94,10 @@ public class MainActivity extends AppCompatActivity {
         }
         mDbHelper.close();*/
         Intent intent = new Intent (this,PrincipalActivity.class);
+        startActivity(intent);
+    }
+    public void  registrarUsuario(){
+        Intent intent = new Intent (this,GeneroActivity.class);
         startActivity(intent);
     }
 
