@@ -31,7 +31,7 @@ public final class GeneralConf {
     public static final String P_GENERO_ID = "genero_id";
     public static final String DATABASE_CREATE_PREFERENCIAS=
             "create table "+DATABASE_TABLE_PREFERENCIAS+" (" +
-                    ""+PREFENCIAS_ID+ "integer primary key autoincrement,"
+                    ""+PREFENCIAS_ID+ " integer primary key autoincrement,"
                     +P_USER_ID+" integer not null, "
                     +P_GENERO_ID+" integer not null," +
                     "FOREIGN KEY ("+P_USER_ID+") REFERENCES "+DATABASE_TABLE_USER+" ("+U_ID+"),"+
