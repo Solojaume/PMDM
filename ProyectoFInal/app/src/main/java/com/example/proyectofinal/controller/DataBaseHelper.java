@@ -9,6 +9,11 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import com.example.proyectofinal.MainActivity;
 import com.example.proyectofinal.controller.GeneralConf;
+import com.example.proyectofinal.model.Genero;
+
+import java.util.ArrayList;
+import java.util.List;
+
 public class DataBaseHelper {
     private Context mCtx;
     private DataBaseHelperInternal mDbHelper = null;
@@ -55,7 +60,7 @@ public class DataBaseHelper {
         mDbHelper.close();
     }
 
-    //obtener todos los elementos
+    //obtener todos los usuarios
     public Cursor getUsuarios() {
         return mDb.query(GeneralConf.DATABASE_TABLE_USER, new String[] {GeneralConf.U_ID, GeneralConf.USERNAME, GeneralConf.U_PASSWORD,GeneralConf.U_INICIADO}, null, null, null, null,GeneralConf.USERNAME);
     }
@@ -117,6 +122,7 @@ public class DataBaseHelper {
         }
         return 0;
     }
+
     //comprobar si un usario existe
     public boolean userExist(String userName){
         try {
@@ -138,7 +144,22 @@ public class DataBaseHelper {
         return mDb.update(GeneralConf.DATABASE_TABLE_USER, cv, GeneralConf.U_ID+ "=?", new String[]{Integer.toString(id)});
     }
 
-    //count users
+    //Obtener generos
+    private Cursor getGeneros() {
+        return mDb.query(GeneralConf.DATABASE_CREATE_GENERO, new String[] {GeneralConf.GENERO_ID, GeneralConf.G_NAME}, null, null, null, null,GeneralConf.GENERO_ID);
+
+    }
+    //Obtener generos y los guarde en una lista
+    public void cargarGeneros() throws SQLException{
+        Cursor c = getGeneros();
+        while (c.moveToNext()){
+            List<Genero> g = new ArrayList<Genero>();
+            int id=c.getInt(c.getColumnIndex(GeneralConf.GENERO_ID));
+            String name =c.getString(c.getColumnIndex(GeneralConf.G_NAME));
+            g.add(new Genero(id,name));
+
+        }
+    }
 
 
 }

@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     public static DataBaseHelper mDbHelper = null;
     private Preferencias[] preferencias={new Preferencias(1,1,2),new Preferencias(2,2,1)};
     private Genero[] generos={new Genero(1,"Rock"), new Genero(2,"Balada"),new Genero(3,"Pop")};
-    public static int idUser=1;
+    public static int idUser=0;
 
     TextView tError ;
     private  EditText eUser,ePass;
