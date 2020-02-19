@@ -35,10 +35,14 @@ public class DataBaseHelper {
         }
         private void createTables(SQLiteDatabase db) {
             db.execSQL(GeneralConf.DATABASE_CREATE_USER);
+            db.execSQL(GeneralConf.DATABASE_CREATE_GENERO);
+            db.execSQL(GeneralConf.DATABASE_CREATE_PREFERENCIAS);
         }
 
         private void deleteTables(SQLiteDatabase db) {
             db.execSQL("DROP TABLE IF EXISTS " + GeneralConf.DATABASE_TABLE_USER);
+            db.execSQL("DROP TABLE IF EXISTS " + GeneralConf.DATABASE_TABLE_GENERO);
+            db.execSQL("DROP TABLE IF EXISTS " + GeneralConf.DATABASE_TABLE_PREFERENCIAS);
         }
     }
     public DataBaseHelper open()  {

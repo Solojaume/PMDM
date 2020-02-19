@@ -22,20 +22,17 @@ public class MainActivity extends AppCompatActivity {
     private Preferencias[] preferencias={new Preferencias(1,1,2),new Preferencias(2,2,1)};
     private Genero[] generos={new Genero(1,"Rock"), new Genero(2,"Balada"),new Genero(3,"Pop")};
     public static int idUser=1;
-    Integer mRowId=null;
+
     TextView tError ;
-    public static EditText eUser,ePass;
+    private  EditText eUser,ePass;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         eUser=findViewById(R.id.editTextU);
         ePass=findViewById(R.id.editTextP);
         mDbHelper = new DataBaseHelper(this);
         tError= findViewById(R.id.textViewError);
-        mRowId = (savedInstanceState == null) ? null :
-                (Integer) savedInstanceState.getSerializable(GeneralConf.U_ID);
 
 //        sesionIniciada();
 //        try {
@@ -121,7 +118,7 @@ public class MainActivity extends AppCompatActivity {
         // se abre la base de datos y se obtienen los elementos
         mDbHelper.open();
         Cursor itemCursor = mDbHelper.getUsuarios();
-        ListEntry item = null;
+        Genero item = null;
         ArrayList<ListEntry> resultList = new ArrayList<ListEntry>();
         // se procesa el resultado
         while (itemCursor.moveToNext()) {

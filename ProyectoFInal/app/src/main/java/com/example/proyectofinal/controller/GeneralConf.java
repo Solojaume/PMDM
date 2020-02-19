@@ -4,7 +4,7 @@ import com.example.proyectofinal.model.Genero;
 
 public final class GeneralConf {
     protected static final String DATABASE_NAME = "DBFinal";
-    protected static final int DATABASE_VERSION = 3;
+    protected static final int DATABASE_VERSION = 2;
 
     //Tabla Usuario
     public static final String DATABASE_TABLE_USER="user";
@@ -16,12 +16,12 @@ public final class GeneralConf {
             "create table "+DATABASE_TABLE_USER+" ("+U_ID+ " integer primary key autoincrement,"+USERNAME+" text not null, "
             +U_PASSWORD+" text not null, "+U_INICIADO+ " integer )";
     //Tabla Genero
-    public static final String DATABASE_TABLE_GENEROS="genero";
+    public static final String DATABASE_TABLE_GENERO="genero";
     public static final String GENERO_ID ="id";
     public static final String G_NAME  = "name";
     public static final String DATABASE_CREATE_GENERO=
-            "create table "+DATABASE_TABLE_USER+" ("
-                    + GENERO_ID+ " integer primary key,"
+            "create table "+DATABASE_TABLE_GENERO+" ("
+                    + GENERO_ID+ " integer primary key autoincrement,"
                     +G_NAME+" text not null)";
 
      //Tabla Preferencia usuario
@@ -35,7 +35,7 @@ public final class GeneralConf {
                     +P_USER_ID+" integer not null, "
                     +P_GENERO_ID+" integer not null," +
                     "FOREIGN KEY ("+P_USER_ID+") REFERENCES "+DATABASE_TABLE_USER+" ("+U_ID+"),"+
-                    "FOREIGN KEY ("+P_GENERO_ID+") REFERENCES "+DATABASE_TABLE_GENEROS+" ("+GENERO_ID+"))";
+                    "FOREIGN KEY ("+P_GENERO_ID+") REFERENCES "+DATABASE_TABLE_GENERO+" ("+GENERO_ID+"))";
 
 
 
