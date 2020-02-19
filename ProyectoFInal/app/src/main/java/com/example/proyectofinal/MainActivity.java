@@ -15,6 +15,7 @@ import com.example.proyectofinal.model.Genero;
 import com.example.proyectofinal.model.Preferencias;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
     private int mLastRowSelected = 0;
@@ -33,7 +34,7 @@ public class MainActivity extends AppCompatActivity {
         ePass=findViewById(R.id.editTextP);
         mDbHelper = new DataBaseHelper(this);
         tError= findViewById(R.id.textViewError);
-
+        fillData();
 //        sesionIniciada();
 //        try {
 //            fillData();
@@ -115,26 +116,23 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void fillData() {
-        // se abre la base de datos y se obtienen los elementos
+        // se abre la base de datos y se obtienen los generos
+
+        Genero genero = null;
+        List<Genero> resultList = new ArrayList<Genero>();
         mDbHelper.open();
-        Cursor itemCursor = mDbHelper.getUsuarios();
-        Genero item = null;
-        ArrayList<ListEntry> resultList = new ArrayList<ListEntry>();
-        // se procesa el resultado
-        while (itemCursor.moveToNext()) {
-            int id = itemCursor.getInt(itemCursor.getColumnIndex(GeneralConf.U_ID));
-            String pass = itemCursor.getString(itemCursor.getColumnIndex(GeneralConf.U_PASSWORD));
-            String username = itemCursor.getString(itemCursor.getColumnIndex(GeneralConf.USERNAME));
-            int iniciada = itemCursor.getInt(itemCursor.getColumnIndex(GeneralConf.U_INICIADO));
-//            item = new ListEntry();
-//            item.id = id;
-//            item.task = task;
-//            item.place = place;
-//            item.importance = importance;
-//            resultList.add(item);
+        try{
+            Cursor cursor = mDbHelper.getUsuarios();
+            do {
+
+            }while(cursor.moveToNext());
+            cursor.close();
+        }catch (Exception e){
+
         }
-        //cerramos la base de datos
-        itemCursor.close();
+
+
+
         mDbHelper.close();
 
     }
