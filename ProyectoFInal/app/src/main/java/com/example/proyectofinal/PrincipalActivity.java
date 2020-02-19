@@ -21,16 +21,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PrincipalActivity extends AppCompatActivity {
-    private Preferencias[] preferencias={new Preferencias(1,1,2),new Preferencias(2,2,1)};
-    private Genero[] generos={new Genero(1,"Rock"), new Genero(2,"Balada"),new Genero(3,"Pop")};
+    private Preferencias[] preferencias;
+    private Genero[] generos;
     List<Genero> generosUsuario= new ArrayList<Genero>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_principal);
         Intent intent= getIntent();
         Bundle bundle=intent.getExtras();
-        preferencias=bundle.getSerializable("lG");
-        setContentView(R.layout.activity_principal);
+        generos = (Genero[]) bundle.getSerializable("lG");
+        preferencias= (Preferencias[]) bundle.getSerializable("lP");
+
         filtrarPreferenciasGenero();
         ListView lstGeneros = (ListView)findViewById(R.id.listViewGeneros);
         AdaptadorGenero adaptador = new AdaptadorGenero(this,generosUsuario);
@@ -39,7 +41,7 @@ public class PrincipalActivity extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                String mensaje = "Id: "+generos[position].getId()+",  Name:"+generos[position].getNombre();
+                String mensaje = "Id: "+generosUsuario.get(position).getId()+",  Name: "+generosUsuario.get(position).getNombre();
                 Toast.makeText(getApplicationContext(),mensaje,Toast.LENGTH_LONG).show();
             }
         });

@@ -1,6 +1,8 @@
 package com.example.proyectofinal.model;
 
-public class Preferencias {
+import java.io.Serializable;
+
+public class Preferencias implements Serializable {
     private int id, userId, generoId;
 
     public Preferencias(int id, int userId, int generoId) {

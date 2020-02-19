@@ -4,7 +4,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.database.Cursor;
-import android.database.SQLException;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.EditText;
@@ -55,59 +54,38 @@ public class MainActivity extends AppCompatActivity {
 
     public void iniciarUsuario(View view){//onclick button
         mDbHelper.open();
-        System.out.println(mDbHelper.getUser(eUser.getText().toString()));
-        /*try {
-            Cursor userCursor = mDbHelper.getUsuarios();
+        int resp=mDbHelper.userLogin(eUser.getText().toString(),ePass.getText().toString());
+        if(resp>0){
+            if (resp==2){//Todo correcto
+                ePass.setText("");
+                Intent intent = new Intent (this,PrincipalActivity.class);
+                Bundle bundle= new Bundle();
+                bundle.putSerializable("lG",generos);
+                bundle.putSerializable("lP",preferencias);
+                intent.putExtras(bundle);
+                startActivity(intent);
+                mDbHelper.close();
+            }
+            else {
+                tError.setText("Contraseña incorreta");
+            }
+        }
+        else
+            tError.setText("Usuario no existe");
+        mDbHelper.close();
+    }
 
-        System.out.println("================================"+userCursor.getCount());
-        if (userCursor.getCount() == 0){
+    public void  registrarUsuario(View view){
+        mDbHelper.open();
+        if(mDbHelper.userExist(eUser.getText().toString())==true){
+            tError.setText("El usuario ya existe");
+
+        }else{
             mDbHelper.insertUser(eUser.getText().toString(),ePass.getText().toString());
             Intent intent = new Intent (this,GeneroActivity.class);
             startActivity(intent);
         }
-        else{
-            userCursor = mDbHelper.getUser(eUser.getText().toString());
-            String userN=null;
-            String pass=null;
-            if (userCursor.getCount()>0){
-                userN = userCursor.getString(userCursor.getColumnIndex(GeneralConf.USERNAME));
-                pass = userCursor.getString(userCursor.getColumnIndex(GeneralConf.U_PASSWORD));
-            }
-
-            if(userN=="null"){//User no esiste
-                mDbHelper.insertUser(eUser.getText().toString(),ePass.getText().toString());
-                idUser = userCursor.getInt(userCursor.getColumnIndex(GeneralConf.U_ID));
-                Intent intent = new Intent (this,GeneroActivity.class);
-                startActivity(intent);
-
-            }else {//User existe
-                if(pass.equals(ePass.getText().toString())){
-                    idUser = userCursor.getInt(userCursor.getColumnIndex(GeneralConf.U_ID));
-                    Intent intent = new Intent (this,PrincipalActivity.class);
-                    startActivity(intent);
-                }
-                else{
-                    tError.setText("No se ha introducido la contraseña correcta");
-                }
-            }
-
-
-        }
-        }catch (SQLException e){
-
-        }
-        mDbHelper.close();*/
-        Intent intent = new Intent (this,PrincipalActivity.class);
-        Bundle bundle= new Bundle();
-        bundle.putSerializable("lG",generos);
-        bundle.putSerializable("lP",preferencias);
-        bundle.putInt("idU",idUser);
-        intent.putExtras(bundle);
-        startActivity(intent);
-    }
-    public void  registrarUsuario(){
-        Intent intent = new Intent (this,GeneroActivity.class);
-        startActivity(intent);
+        mDbHelper.close();
     }
 
     public int sesionIniciada(){

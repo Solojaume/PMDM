@@ -3,8 +3,11 @@ package com.example.proyectofinal.controller;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import com.example.proyectofinal.MainActivity;
 import com.example.proyectofinal.controller.GeneralConf;
 public class DataBaseHelper {
     private Context mCtx;
@@ -68,6 +71,7 @@ public class DataBaseHelper {
         initialValues.put(GeneralConf.USERNAME, username);
         initialValues.put(GeneralConf.U_PASSWORD, password);
 //        initialValues.put(GeneralConf.U_INICIADO,1);
+        asignarId(username);
         return mDb.insert(GeneralConf.DATABASE_TABLE_USER, null, initialValues);
     }
 
@@ -77,11 +81,48 @@ public class DataBaseHelper {
     }
 
     //obtener usuario
-    public Cursor getUser(int itemId){
-        return mDb.rawQuery(" select "+ GeneralConf.U_ID+","+ GeneralConf.USERNAME+","+ GeneralConf.U_PASSWORD+","+GeneralConf.U_INICIADO + " from " + GeneralConf.DATABASE_TABLE_USER  + " where " + GeneralConf.U_ID + "= ?",new String[]{Integer.toString(itemId)});
-    }
     public Cursor getUser(String userName){
         return mDb.rawQuery(" select "+ GeneralConf.U_ID+","+ GeneralConf.USERNAME+","+ GeneralConf.U_PASSWORD+","+GeneralConf.U_INICIADO + " from " + GeneralConf.DATABASE_TABLE_USER  + " where " + GeneralConf.USERNAME + "= ?",new String[]{userName});
+    }
+
+    private boolean asignarId(String userName){
+        try {
+            Cursor cursor =getUser(userName);
+            MainActivity.idUser= cursor.getColumnIndex(GeneralConf.U_ID);
+            return true;
+        }catch (SQLException E){
+            MainActivity.idUser= 0;
+            return false;
+        }
+    }
+
+    //Logear usurio
+    public int userLogin(String userName, String pas){
+        try {
+            Cursor cursor =getUser(userName);
+            if(cursor.getCount() >0) {
+                cursor = mDb.rawQuery(" select " + GeneralConf.U_ID + "," + GeneralConf.USERNAME + "," + GeneralConf.U_PASSWORD + "," + GeneralConf.U_INICIADO + " from " + GeneralConf.DATABASE_TABLE_USER + " where " + GeneralConf.USERNAME + "='"+userName +"' and "+ GeneralConf.U_PASSWORD+"='"+pas+"'",null);
+                if(cursor.getCount() >0) {
+                    MainActivity.idUser= cursor.getColumnIndex(GeneralConf.U_ID);
+                    return 2;//Todo correcto
+                }
+                return 1;//Significa que el usuario existe pero la contraseña no es correcta
+            }
+        }catch (SQLException e){
+            return 0;//no existe
+        }
+        return 0;
+    }
+    //comprobar si un usario existe
+    public boolean userExist(String userName){
+        try {
+            Cursor cursor =getUser(userName);
+            if(cursor.getCount() >0)
+                return true;
+        }catch (SQLException e) {
+            return false;
+        }
+        return false;
     }
 
     //actualiza usuario
