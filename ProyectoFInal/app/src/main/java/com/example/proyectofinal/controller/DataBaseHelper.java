@@ -85,8 +85,8 @@ public class DataBaseHelper {
     }
 
     //borrar usuario
-    public int delete(int mLastRowSelected) {
-        return mDb.delete(GeneralConf.DATABASE_TABLE_USER, GeneralConf.U_ID + "=?", new String[]{ Integer.toString(mLastRowSelected)});
+    public int deleteUsuario(int mLastRowSelected) {
+        return mDb.delete(GeneralConf.DATABASE_TABLE_USER, GeneralConf.U_ID + " = ?", new String[]{ Integer.toString(mLastRowSelected)});
     }
 
     //obtener usuario
@@ -145,21 +145,32 @@ public class DataBaseHelper {
     }
 
     //Obtener generos
-    private Cursor getGeneros() {
-        return mDb.query(GeneralConf.DATABASE_CREATE_GENERO, new String[] {GeneralConf.GENERO_ID, GeneralConf.G_NAME}, null, null, null, null,GeneralConf.GENERO_ID);
-
+    private Cursor getGeneros() throws SQLException{
+        Cursor c= mDb.query(GeneralConf.DATABASE_TABLE_GENERO, new String[] {GeneralConf.GENERO_ID, GeneralConf.G_NAME}, null, null, null, null,GeneralConf.GENERO_ID);
+        return c;
     }
-    //Obtener generos y los guarde en una lista
-    public void cargarGeneros() throws SQLException{
-        Cursor c = getGeneros();
-        while (c.moveToNext()){
-            List<Genero> g = new ArrayList<Genero>();
-            int id=c.getInt(c.getColumnIndex(GeneralConf.GENERO_ID));
-            String name =c.getString(c.getColumnIndex(GeneralConf.G_NAME));
-            g.add(new Genero(id,name));
 
+    //Obtener generos y los guarde en una lista
+    public boolean cargarGeneros() {
+        MainActivity.generosList.clear();
+        try{
+            Cursor c = this.getGeneros();
+            while (c.moveToNext()){
+                int id=c.getInt(c.getColumnIndex(GeneralConf.GENERO_ID));
+                String name =c.getString(c.getColumnIndex(GeneralConf.G_NAME));
+                MainActivity.generosList.add(new Genero(id,name));
+            }
+            return true;
+        }catch (SQLException e){
+            return false;
         }
     }
 
+    //Insertar genero
+    public long insertGenero(String name){
+        ContentValues initialValues = new ContentValues();
+        initialValues.put(GeneralConf.G_NAME,name);
+        return mDb.insert(GeneralConf.DATABASE_TABLE_GENERO,null,initialValues);
+    }
 
 }

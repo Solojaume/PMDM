@@ -22,16 +22,12 @@ import java.util.List;
 
 public class PrincipalActivity extends AppCompatActivity {
     private Preferencias[] preferencias;
-    private Genero[] generos;
+
     List<Genero> generosUsuario= new ArrayList<Genero>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_principal);
-        Intent intent= getIntent();
-        Bundle bundle=intent.getExtras();
-        generos = (Genero[]) bundle.getSerializable("lG");
-        preferencias= (Preferencias[]) bundle.getSerializable("lP");
 
         filtrarPreferenciasGenero();
         ListView lstGeneros = (ListView)findViewById(R.id.listViewGeneros);
@@ -77,9 +73,9 @@ public class PrincipalActivity extends AppCompatActivity {
     private void filtrarPreferenciasGenero(){
         for (int i = 0; i <preferencias.length; i++) {
             if(preferencias[i].getUserId()==MainActivity.idUser) {
-                for (int j = 0; j < generos.length; j++) {
-                    if (preferencias[i].getGeneroId() == generos[j].getId())
-                        generosUsuario.add(generos[j]);
+                for (int j = 0; j < MainActivity.generosList.size(); j++) {
+                    if (preferencias[i].getGeneroId() == MainActivity.generosList.get(j).getId())
+                        generosUsuario.add(MainActivity.generosList.get(j));
                 }
             }
         }

@@ -21,7 +21,7 @@ public class MainActivity extends AppCompatActivity {
     private int mLastRowSelected = 0;
     public static DataBaseHelper mDbHelper = null;
     private Preferencias[] preferencias={new Preferencias(1,1,2),new Preferencias(2,2,1)};
-    private Genero[] generos={new Genero(1,"Rock"), new Genero(2,"Balada"),new Genero(3,"Pop")};
+    public static List <Genero> generosList = new ArrayList<Genero>();
     public static int idUser=0;
 
     TextView tError ;
@@ -35,20 +35,16 @@ public class MainActivity extends AppCompatActivity {
         mDbHelper = new DataBaseHelper(this);
         tError= findViewById(R.id.textViewError);
         fillData();
-//        sesionIniciada();
-//        try {
-//            fillData();
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-////            showMessage(R.string.dataError);
-//        }
-////        registerForContextMenu(getListView());
+//
     }
+
 
     @Override
     protected void onRestart() {
         super.onRestart();
+        fillData();
     }
+
 
     public void iniciarUsuario(View view){//onclick button
         mDbHelper.open();
@@ -57,10 +53,10 @@ public class MainActivity extends AppCompatActivity {
             if (resp==2){//Todo correcto
                 ePass.setText("");
                 Intent intent = new Intent (this,PrincipalActivity.class);
-                Bundle bundle= new Bundle();
-                bundle.putSerializable("lG",generos);
-                bundle.putSerializable("lP",preferencias);
-                intent.putExtras(bundle);
+//                Bundle bundle= new Bundle();
+//                bundle.putSerializable("lG",generos);
+//                bundle.putSerializable("lP",preferencias);
+//                intent.putExtras(bundle);
                 startActivity(intent);
                 mDbHelper.close();
             }
@@ -117,23 +113,15 @@ public class MainActivity extends AppCompatActivity {
 
     private void fillData() {
         // se abre la base de datos y se obtienen los generos
-
-        Genero genero = null;
-        List<Genero> resultList = new ArrayList<Genero>();
-        mDbHelper.open();
-        try{
-            Cursor cursor = mDbHelper.getUsuarios();
-            do {
-
-            }while(cursor.moveToNext());
-            cursor.close();
-        }catch (Exception e){
-
+        if(!mDbHelper.cargarGeneros()){
+            mDbHelper.insertGenero("Rock");
+            mDbHelper.insertGenero("Salsa");
+            mDbHelper.insertGenero("Pop");
         }
 
+      mDbHelper.cargarGeneros();
 
-
-        mDbHelper.close();
+      mDbHelper.close();
 
     }
     private class ListEntry {
