@@ -27,7 +27,9 @@ public class GeneroActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_genero);
-
+        MainActivity.mDbHelper.open();
+        MainActivity.mDbHelper.cargarGeneros();
+        MainActivity.mDbHelper.close();
         ListView lstGeneros = (ListView) findViewById(R.id.listViewGeneros);
         AdaptadorGenero adaptador = new AdaptadorGenero(this, MainActivity.generosList);
         lstGeneros.setAdapter(adaptador);

@@ -114,7 +114,7 @@ public class MainActivity extends AppCompatActivity {
     private void fillData() {
         mDbHelper.open();
         // se abre la base de datos y se obtienen los generos
-        if(!mDbHelper.cargarGeneros()){
+        if(mDbHelper.cargarGeneros()==false){
             mDbHelper.insertGenero("Rock");
             mDbHelper.insertGenero("Salsa");
             mDbHelper.insertGenero("Pop");

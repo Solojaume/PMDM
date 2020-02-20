@@ -4,7 +4,7 @@ import com.example.proyectofinal.model.Genero;
 
 public final class GeneralConf {
     protected static final String DATABASE_NAME = "DBFinal";
-    protected static final int DATABASE_VERSION = 2;
+    protected static final int DATABASE_VERSION = 1;
 
     //Tabla Usuario
     public static final String DATABASE_TABLE_USER="user";
