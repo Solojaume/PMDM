@@ -112,6 +112,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void fillData() {
+        mDbHelper.open();
         // se abre la base de datos y se obtienen los generos
         if(!mDbHelper.cargarGeneros()){
             mDbHelper.insertGenero("Rock");

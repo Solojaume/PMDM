@@ -22,14 +22,14 @@ import java.util.List;
 
 public class GeneroActivity extends AppCompatActivity {
     private List<Preferencias> preferencias= new ArrayList<Preferencias>();
-    private Genero[] generos={new Genero(1,"Rock"), new Genero(2,"Balada"),new Genero(3,"Pop")};
+//    private Genero[] generos={new Genero(1,"Rock"), new Genero(2,"Balada"),new Genero(3,"Pop")};
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_genero);
 
         ListView lstGeneros = (ListView) findViewById(R.id.listViewGeneros);
-        AdaptadorGenero adaptador = new AdaptadorGenero(this, Arrays.asList(generos));
+        AdaptadorGenero adaptador = new AdaptadorGenero(this, MainActivity.generosList);
         lstGeneros.setAdapter(adaptador);
         lstGeneros.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
@@ -37,11 +37,11 @@ public class GeneroActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Boolean bool = true;//Esto dice si el genero esta o no en la lista de preferencias de usuario
                 for (int i = 0; i < preferencias.size(); i++) {
-                    if(preferencias.get(i).getGeneroId()==generos[position].getId())
+                    if(preferencias.get(i).getGeneroId()==MainActivity.generosList.get(position).getId())
                         bool=false;
                 }
                 if(bool)
-                    preferencias.add(new Preferencias('1',MainActivity.idUser,generos[position].getId()));
+                    preferencias.add(new Preferencias('1',MainActivity.idUser,MainActivity.generosList.get(position).getId()));
             }
         });
 

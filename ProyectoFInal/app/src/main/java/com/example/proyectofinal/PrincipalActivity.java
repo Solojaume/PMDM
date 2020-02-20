@@ -21,8 +21,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PrincipalActivity extends AppCompatActivity {
-    private Preferencias[] preferencias;
-
+    private Preferencias[] preferencias={new Preferencias(1,1,2),new Preferencias(2,2,1)};
     List<Genero> generosUsuario= new ArrayList<Genero>();
     @Override
     protected void onCreate(Bundle savedInstanceState) {

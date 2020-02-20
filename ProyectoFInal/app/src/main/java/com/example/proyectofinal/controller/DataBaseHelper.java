@@ -145,8 +145,8 @@ public class DataBaseHelper {
     }
 
     //Obtener generos
-    private Cursor getGeneros() throws SQLException{
-        Cursor c= mDb.query(GeneralConf.DATABASE_TABLE_GENERO, new String[] {GeneralConf.GENERO_ID, GeneralConf.G_NAME}, null, null, null, null,GeneralConf.GENERO_ID);
+    private Cursor getGeneros()  {
+        Cursor c= mDb.rawQuery(String.format("select * from %s",GeneralConf.DATABASE_TABLE_GENERO),null);
         return c;
     }
 
@@ -162,6 +162,7 @@ public class DataBaseHelper {
             }
             return true;
         }catch (SQLException e){
+            System.out.println(e);
             return false;
         }
     }
