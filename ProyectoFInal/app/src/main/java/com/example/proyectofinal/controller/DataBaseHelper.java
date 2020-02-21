@@ -91,7 +91,7 @@ public class DataBaseHelper {
 
     //obtener usuario
     public Cursor getUser(String userName){
-        return mDb.query(GeneralConf.DATABASE_TABLE_USER, new String[] {GeneralConf.GENERO_ID, GeneralConf.G_NAME}, null, null, null, null,GeneralConf.GENERO_ID);
+        return mDb.rawQuery(" select "+ GeneralConf.U_ID+","+ GeneralConf.USERNAME+","+ GeneralConf.U_PASSWORD+","+GeneralConf.U_INICIADO + " from " + GeneralConf.DATABASE_TABLE_USER  + " where " + GeneralConf.USERNAME + "= ?",new String[]{userName});
     }
 
     private boolean asignarId(String userName){
@@ -99,7 +99,7 @@ public class DataBaseHelper {
             Cursor cursor =getUser(userName);
             MainActivity.idUser= cursor.getInt(cursor.getColumnIndex(GeneralConf.U_ID));
             return true;
-        }catch (SQLException E){
+        }catch (Exception E){
             MainActivity.idUser= 0;
             return false;
         }
